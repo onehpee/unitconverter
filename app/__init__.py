@@ -17,6 +17,19 @@ def create_app():
 
         # converter to desired
         return refer_unit / units[unit_to]
+    
+    def length():
+    # key unit value in meter
+        LENGTH = {
+        "mm": 0.001,
+        "cm": 0.01,
+        "m": 1,
+        "km": 1000,
+        "inch": 0.0254,
+        "foot": 0.3048,
+        "yard": 0.9144,
+        "mile": 1609.344,
+    }
 
     
     app.register_blueprint(views, url_prefix='/' )
