@@ -52,7 +52,15 @@ def create_app():
         "yard": 0.9144,
         "mile": 1609.344,
     }
-        
+def weight():
+    # value in grams
+    WEIGHT = {
+        "mg": 0.001,
+        "gr": 1,
+        "kg": 1000,
+        "ounce": 28.35,
+        "pound": 453.59,
+    }       
 
     
     app.register_blueprint(views, url_prefix='/' )
