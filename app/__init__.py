@@ -52,6 +52,33 @@ def create_app():
         "yard": 0.9144,
         "mile": 1609.344,
     }
+        units = LENGTH.keys()
+
+        # Prev post is none if result copy and delete in session
+        result = session.pop("result", None)
+
+        if request.method == "POST":
+            value = request.form.get("length")
+            unit_from = request.form.get("unit_from")
+            unit_to = request.form.get("unit_to")
+
+            # check post values
+            if (
+                (not value or value.isalpha())
+                or unit_from not in units
+                or unit_to not in units
+            ):
+                return redirect(url_for("length"))
+
+            result = converter_unit(
+                units=LENGTH, value=value, unit_from=unit_from, unit_to=unit_to
+            )
+            view_result = f"{value}{unit_from} = {result}{unit_to}"
+            # add result
+            session["result"] = view_result
+            return redirect(url_for("length"))
+
+        return render_template("./pages/length.html", units=units, result=result)
 def weight():
     # value in grams
     WEIGHT = {
